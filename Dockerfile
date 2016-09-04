@@ -2,7 +2,7 @@ FROM node:onbuild
 
 RUN ./node_modules/.bin/gulp
 
-RUN npm npm install pm2 --save-dev
+RUN npm install pm2 --save-dev
 
 EXPOSE 80
 
