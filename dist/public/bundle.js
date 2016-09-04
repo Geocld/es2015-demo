@@ -17870,9 +17870,11 @@ module.exports = Watcher
 },{}],75:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _vue = require('vue');
 
@@ -17880,11 +17882,9 @@ var _vue2 = _interopRequireDefault(_vue);
 
 var _config = require('../config');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var duoshuoCode = '\n  <div class="ds-thread" data-thread-key="{{id}}" data-title="{{title}}" data-url="{{baseUrl}}/#!/post/{{id}}"></div>\n  <!-- 多说评论框 end -->\n  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->\n  <script type="text/javascript">\n  <!-- 多说公共JS代码 end -->\n';
 
-exports.default = _vue2.default.component('duoshuo', {
+exports['default'] = _vue2['default'].component('duoshuo', {
   template: duoshuoCode,
   replace: true,
   props: ['post_title', 'post_id'],
@@ -17896,23 +17896,26 @@ exports.default = _vue2.default.component('duoshuo', {
       title: this['post_title']
     };
   },
+
   ready: function ready() {
     DUOSHUO.EmbedThread(document.querySelector('.ds-thread'));
   }
+
 });
+module.exports = exports['default'];
 
 },{"../config":79,"vue":71}],76:[function(require,module,exports){
 'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _vue = require('vue');
 
 var _vue2 = _interopRequireDefault(_vue);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var template = '\n  <div class="panel panel-default">\n    <div v-if="title" class="panel-heading">\n      <h3 class="panel-title">\n        {{title}}\n      </h3>\n    </div>\n    <div class="panel-body">\n      <div v-if="content" v-html="content"></div>\n      <ul v-if="list">\n        <li v-repeat="el: list"><a href="{{el.link}}" target="_blank">{{el.title}}</a></li>\n      </ul>\n    </div>\n    <div v-if="footer" class="panel-footer">\n      {{footer}}\n    </div>\n  </div>\n';
 
-_vue2.default.component('Panel', {
+_vue2['default'].component('Panel', {
   template: template,
   replace: true,
   props: ['title', 'content', 'footer', 'list'],
@@ -17930,9 +17933,11 @@ _vue2.default.component('Panel', {
 },{"vue":71}],77:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _vue = require('vue');
 
@@ -17942,27 +17947,30 @@ var _marked = require('marked');
 
 var _marked2 = _interopRequireDefault(_marked);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var template = '\n  <div class="post" v-attr="id: id">\n    <h2><a href="/#!/post/{{id}}" v-text="title"></a></h2>\n    <p v-text="summary"></p>\n    <p>\n      <small>由 {{author}} 发表</small> | <small>{{comments}} 条评论</small> | <a class="btn" href="/#!/post/{{id}}">查看更多 »</a>\n    </p>\n  </div>\n';
 
-var postComponent = _vue2.default.component('post-in-list', {
+var postComponent = _vue2['default'].component('post-in-list', {
   template: template,
   replace: true,
 
   filters: {
-    marked: _marked2.default
+    marked: _marked2['default']
   }
 });
 
-exports.default = postComponent;
+exports['default'] = postComponent;
+module.exports = exports['default'];
 
 },{"marked":5,"vue":71}],78:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { var callNext = step.bind(null, 'next'); var callThrow = step.bind(null, 'throw'); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(callNext, callThrow); } } callNext(); }); }; }
 
 var _vue = require('vue');
 
@@ -17974,17 +17982,13 @@ var _marked2 = _interopRequireDefault(_marked);
 
 require('./duoshuo');
 
-var _posts = require('../models/posts');
+var _modelsPosts = require('../models/posts');
 
-var _posts2 = _interopRequireDefault(_posts);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { var callNext = step.bind(null, "next"); var callThrow = step.bind(null, "throw"); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(callNext, callThrow); } } callNext(); }); }; }
+var _modelsPosts2 = _interopRequireDefault(_modelsPosts);
 
 var template = '\n  <h1 v-text="title"></h1>\n  <small>由 {{author}} 发表</small>\n  <div class="post" v-html="content | marked"></div>\n  <duoshuo v-if="loaded" post_id="{{id}}" post_title="{{title}}"></duoshuo>\n';
 
-var postVm = _vue2.default.component('post', {
+var postVm = _vue2['default'].component('post', {
   template: template,
   replace: true,
   props: ['id'],
@@ -17997,94 +18001,88 @@ var postVm = _vue2.default.component('post', {
       loaded: false
     };
   },
-  created: (function () {
-    var ref = _asyncToGenerator(function* () {
-      var post = yield _posts2.default.getPost(this.id);
-      post.loaded = true;
-      this.$data = post;
-    });
 
-    return function created() {
-      return ref.apply(this, arguments);
-    };
-  })(),
+  created: _asyncToGenerator(function* () {
+    var post = yield _modelsPosts2['default'].getPost(this.id);
+    post.loaded = true;
+    this.$data = post;
+  }),
 
   filters: {
-    marked: _marked2.default
+    marked: _marked2['default']
   }
 });
 
-exports.default = postVm;
+exports['default'] = postVm;
+module.exports = exports['default'];
 
 },{"../models/posts":84,"./duoshuo":75,"marked":5,"vue":71}],79:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
-let blogUrl = exports.blogUrl = 'http://es2015-in-action.avosapps.com';
+var blogUrl = 'http://es2015-in-action.avosapps.com';
+exports.blogUrl = blogUrl;
 
 },{}],80:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { var callNext = step.bind(null, 'next'); var callThrow = step.bind(null, 'throw'); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(callNext, callThrow); } } callNext(); }); }; }
 
 var _vue = require('vue');
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _posts = require('../models/posts');
+var _modelsPosts = require('../models/posts');
 
-var _posts2 = _interopRequireDefault(_posts);
+var _modelsPosts2 = _interopRequireDefault(_modelsPosts);
 
 require('../components/post-in-list');
 
 require('../components/panel');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+exports['default'] = _asyncToGenerator(function* (ctx) {
+  ctx.layoutVM.$data.html = '\n    <h1>\n      ES2015 实战 - DEMO\n    </h1>\n    <hr>\n    <div id="posts" class="col-md-9">\n      <post-in-list v-repeat="posts"></post-in-list>\n    </div>\n    <div id="sidebar" class="col-md-3">\n      <panel title="公告" content="{{content}}" list="{{list}}"></panel>\n    </div>\n  ';
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { var callNext = step.bind(null, "next"); var callThrow = step.bind(null, "throw"); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(callNext, callThrow); } } callNext(); }); }; }
+  var refresh = 'undefined' != typeof ctx.query.refresh;
+  var page = ctx.query.page || 0;
 
-exports.default = (function () {
-  var ref = _asyncToGenerator(function* (ctx) {
-    ctx.layoutVM.$data.html = '\n    <h1>\n      ES2015 实战 - DEMO\n    </h1>\n    <hr>\n    <div id="posts" class="col-md-9">\n      <post-in-list v-repeat="posts"></post-in-list>\n    </div>\n    <div id="sidebar" class="col-md-3">\n      <panel title="公告" content="{{content}}" list="{{list}}"></panel>\n    </div>\n  ';
+  var posts = yield _modelsPosts2['default'].listPosts(page);
 
-    var refresh = 'undefined' != typeof ctx.query.refresh;
-    var page = ctx.query.page || 0;
+  _vue2['default'].nextTick(function () {
+    new _vue2['default']({
+      el: '#posts',
+      data: {
+        posts: posts
+      }
+    });
 
-    var posts = yield _posts2.default.listPosts(page);
-
-    _vue2.default.nextTick(function () {
-      new _vue2.default({
-        el: '#posts',
-        data: {
-          posts: posts
-        }
-      });
-
-      new _vue2.default({
-        el: '#sidebar',
-        data: {
-          content: '文章地址 <a href="http://gank.io/post/" target="_blank">匠心写作</a>\n                  <br />\n                  感謝以下贊助商對本文的支持',
-          list: [{ title: 'DaoCloud', link: 'http://daocloud.io' }, { title: '100Offer', link: 'http://100offer.com' }]
-        }
-      });
+    new _vue2['default']({
+      el: '#sidebar',
+      data: {
+        content: '文章地址 <a href="http://gank.io/post/" target="_blank">匠心写作</a>\n                  <br />\n                  感謝以下贊助商對本文的支持',
+        list: [{ title: 'DaoCloud', link: 'http://daocloud.io' }]
+      }
     });
   });
-
-  return function handle(_x) {
-    return ref.apply(this, arguments);
-  };
-})();
+});
+module.exports = exports['default'];
 
 },{"../components/panel":76,"../components/post-in-list":77,"../models/posts":84,"vue":71}],81:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _vue = require('vue');
 
@@ -18092,24 +18090,28 @@ var _vue2 = _interopRequireDefault(_vue);
 
 require('../components/post');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (ctx) {
+exports['default'] = function (ctx) {
   ctx.layoutVM.$data.html = '\n    <div id="post">\n      <post id="' + ctx.params.id + '"></post>\n    </div>\n  ';
 
-  _vue2.default.nextTick(function () {
-    new _vue2.default({
+  _vue2['default'].nextTick(function () {
+    new _vue2['default']({
       el: '#post'
     });
   });
 };
 
+module.exports = exports['default'];
+
 },{"../components/post":78,"vue":71}],82:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { var callNext = step.bind(null, 'next'); var callThrow = step.bind(null, 'throw'); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(callNext, callThrow); } } callNext(); }); }; }
 
 var _vue = require('vue');
 
@@ -18123,62 +18125,49 @@ var _marked = require('marked');
 
 var _marked2 = _interopRequireDefault(_marked);
 
-var _posts = require('../models/posts');
+var _modelsPosts = require('../models/posts');
 
-var _posts2 = _interopRequireDefault(_posts);
+var _modelsPosts2 = _interopRequireDefault(_modelsPosts);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+exports['default'] = _asyncToGenerator(function* (ctx) {
+  ctx.layoutVM.$data.html = '\n    <form id="new-post" v-on="submit: submit">\n      <div class="form-group">\n        <label for="author">你的名字</label>\n        <input type="text" class="form-control" name="author" id="author" v-model="author" />\n      </div>\n      <div class="form-group">\n        <label for="title">标题</label>\n        <input type="text" class="form-control" name="title" id="title" v-model="title" />\n      </div>\n      <div class="form-group">\n        <label for="content">内容</label>\n        <div class="row">\n          <div class="col-md-6">\n            <textarea class="form-control" name="content" id="content" rows="10" v-model="content"></textarea>\n          </div>\n          <div class="col-md-6" v-html="content | marked"></div>\n        </div>\n      </div>\n      <button type="submit" class="btn btn-primary">提交</button>\n    </form>\n  ';
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { var callNext = step.bind(null, "next"); var callThrow = step.bind(null, "throw"); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(callNext, callThrow); } } callNext(); }); }; }
+  _vue2['default'].nextTick(function () {
+    new _vue2['default']({
+      el: '#new-post',
 
-exports.default = (function () {
-  var ref = _asyncToGenerator(function* (ctx) {
-    ctx.layoutVM.$data.html = '\n    <form id="new-post" v-on="submit: submit">\n      <div class="form-group">\n        <label for="author">你的名字</label>\n        <input type="text" class="form-control" name="author" id="author" v-model="author" />\n      </div>\n      <div class="form-group">\n        <label for="title">标题</label>\n        <input type="text" class="form-control" name="title" id="title" v-model="title" />\n      </div>\n      <div class="form-group">\n        <label for="content">内容</label>\n        <div class="row">\n          <div class="col-md-6">\n            <textarea class="form-control" name="content" id="content" rows="10" v-model="content"></textarea>\n          </div>\n          <div class="col-md-6" v-html="content | marked"></div>\n        </div>\n      </div>\n      <button type="submit" class="btn btn-primary">提交</button>\n    </form>\n  ';
+      data: {
+        title: '',
+        content: '',
+        author: ''
+      },
 
-    _vue2.default.nextTick(function () {
-      new _vue2.default({
-        el: '#new-post',
+      methods: {
+        submit: _asyncToGenerator(function* (e) {
+          e.preventDefault();
 
-        data: {
-          title: '',
-          content: '',
-          author: ''
-        },
+          var post = yield _modelsPosts2['default'].publishPost({
+            title: this.$data.title,
+            content: this.$data.content,
+            author: this.$data.author
+          });
 
-        methods: {
-          submit: (function () {
-            var ref = _asyncToGenerator(function* (e) {
-              e.preventDefault();
+          window.location.hash = '#!/post/' + post.id;
+        })
+      },
 
-              var post = yield _posts2.default.publishPost({
-                title: this.$data.title,
-                content: this.$data.content,
-                author: this.$data.author
-              });
-
-              window.location.hash = '#!/post/' + post.id;
-            });
-
-            return function submit(_x2) {
-              return ref.apply(this, arguments);
-            };
-          })()
-        },
-
-        filters: {
-          marked: _marked2.default
-        }
-      });
+      filters: {
+        marked: _marked2['default']
+      }
     });
   });
-
-  return function handle(_x) {
-    return ref.apply(this, arguments);
-  };
-})();
+});
+module.exports = exports['default'];
 
 },{"../models/posts":84,"marked":5,"min":6,"vue":71}],83:[function(require,module,exports){
 'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _vue = require('vue');
 
@@ -18196,28 +18185,26 @@ var _querystring = require('querystring');
 
 var _querystring2 = _interopRequireDefault(_querystring);
 
-var _index = require('./controllers/index');
+var _controllersIndex = require('./controllers/index');
 
-var _index2 = _interopRequireDefault(_index);
+var _controllersIndex2 = _interopRequireDefault(_controllersIndex);
 
-var _post = require('./controllers/post');
+var _controllersPost = require('./controllers/post');
 
-var _post2 = _interopRequireDefault(_post);
+var _controllersPost2 = _interopRequireDefault(_controllersPost);
 
-var _publish = require('./controllers/publish');
+var _controllersPublish = require('./controllers/publish');
 
-var _publish2 = _interopRequireDefault(_publish);
+var _controllersPublish2 = _interopRequireDefault(_controllersPublish);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var layoutVM = new _vue2.default({
+var layoutVM = new _vue2['default']({
   el: '#wrapper',
   data: {
     html: ''
   }
 });
 
-var JSONPhelper = new _vue2.default({
+var JSONPhelper = new _vue2['default']({
   el: '#jsonp-helper',
   data: {
     json: false,
@@ -18238,151 +18225,115 @@ var JSONPhelper = new _vue2.default({
   }
 });
 
-(0, _watchmanRouter2.default)({
-  '/': _index2.default,
-  '#!/': _index2.default,
-  '#!/post/:id': _post2.default,
-  '#!/new': _publish2.default
+(0, _watchmanRouter2['default'])({
+  '/': _controllersIndex2['default'],
+  '#!/': _controllersIndex2['default'],
+  '#!/post/:id': _controllersPost2['default'],
+  '#!/new': _controllersPublish2['default']
 }).use(function (ctx, next) {
   ctx.layoutVM = layoutVM;
   ctx.jsonpHelper = JSONPhelper;
-  ctx.query = _querystring2.default.parse(window.location.search.substr(1));
+  ctx.query = _querystring2['default'].parse(window.location.search.substr(1));
   next();
 }).run();
 
 },{"./controllers/index":80,"./controllers/post":81,"./controllers/publish":82,"min":6,"querystring":4,"vue":71,"watchman-router":73}],84:[function(require,module,exports){
 'use strict';
 
-var listPosts = (function () {
-  var ref = _asyncToGenerator(function* () {
-    var page = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
-
-    var count = 10;
-
-    var existsInMinDB = yield _min2.default.exists('posts:id');
-
-    if (!existsInMinDB) {
-      var posts = (yield _fetchPost(page)).map(function (post) {
-        return {
-          id: post._id,
-          title: post.title,
-          content: post.content,
-          author: post.author,
-          comments: post.comments.length,
-          get summary() {
-            return post.content.substr(0, 20) + '...';
-          }
-        };
-      });
-
-      for (var i = 0; i < posts.length; i++) {
-        var post = posts[i];
-
-        yield _min2.default.sadd('posts:id', post.id);
-        yield _min2.default.hmset('post:' + post.id, post);
-      }
-    } else {
-      var ids = yield _min2.default.smembers('posts:id');
-      ids = ids.slice(page * count, (page + 1) * count);
-      var posts = yield _min2.default.mget(ids.map(function (id) {
-        return 'post:' + id;
-      }));
-    }
-
-    return posts;
-  });
-
-  return function listPosts(_x) {
-    return ref.apply(this, arguments);
-  };
-})();
-
-var _fetchPost = (function () {
-  var ref = _asyncToGenerator(function* (page) {
-    var res = yield fetch('/api/posts/list?page=' + page);
-    var reply = yield res.json();
-
-    return reply.posts;
-  });
-
-  return function _fetchPost(_x3) {
-    return ref.apply(this, arguments);
-  };
-})();
-
-var getPost = (function () {
-  var ref = _asyncToGenerator(function* (id) {
-    var existsInMinDB = yield _min2.default.exists('post:' + id);
-
-    if (existsInMinDB) {
-      return yield _min2.default.hgetall('post:' + id);
-    } else {
-      var _ret = yield* (function* () {
-        var res = yield fetch('/api/posts/' + id);
-        var post = (yield res.json()).post;
-
-        yield _min2.default.hmset('post:' + id, {
-          id: post._id,
-          title: post.title,
-          content: post.content,
-          author: post.author,
-          comments: post.comments.length,
-          get summary() {
-            return post.content.substr(0, 20) + '...';
-          }
-        });
-
-        return {
-          v: post
-        };
-      })();
-
-      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-    }
-  });
-
-  return function getPost(_x4) {
-    return ref.apply(this, arguments);
-  };
-})();
-
-var publishPost = (function () {
-  var ref = _asyncToGenerator(function* (post) {
-    var res = yield fetch('/api/posts/new', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(post)
-    });
-    var _post = (yield res.json()).post;
-
-    yield _min2.default.sadd('posts:id', _post._id);
-    yield _min2.default.hmset('post:' + _post._id, {
-      id: _post._id,
-      title: _post.title,
-      content: _post.content,
-      author: _post.author,
-      comments: 0,
-      get summary() {
-        return _post.title.substr(0, 20) + '...';
-      }
-    });
-
-    _post.id = _post._id;
-
-    return _post;
-  });
-
-  return function publishPost(_x5) {
-    return ref.apply(this, arguments);
-  };
-})();
-
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var listPosts = _asyncToGenerator(function* () {
+  var page = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+
+  var count = 10;
+
+  var existsInMinDB = yield _min2['default'].exists('posts:id');
+
+  if (!existsInMinDB) {
+    var posts = (yield _fetchPost(page)).map(function (post) {
+      return Object.defineProperties({
+        id: post._id,
+        title: post.title,
+        content: post.content,
+        author: post.author,
+        comments: post.comments.length
+      }, {
+        summary: {
+          get: function get() {
+            return post.content.substr(0, 20) + '...';
+          },
+          configurable: true,
+          enumerable: true
+        }
+      });
+    });
+
+    for (var i = 0; i < posts.length; i++) {
+      var post = posts[i];
+
+      yield _min2['default'].sadd('posts:id', post.id);
+      yield _min2['default'].hmset('post:' + post.id, post);
+    }
+  } else {
+    var ids = yield _min2['default'].smembers('posts:id');
+    ids = ids.slice(page * count, (page + 1) * count);
+    var posts = yield _min2['default'].mget(ids.map(function (id) {
+      return 'post:' + id;
+    }));
+  }
+
+  return posts;
+});
+
+var _fetchPost = _asyncToGenerator(function* (page) {
+  var res = yield fetch('/api/posts/list?page=' + page);
+  var reply = yield res.json();
+
+  return reply.posts;
+});
+
+var getPost = _asyncToGenerator(function* (id) {
+  return yield _min2['default'].hgetall('post:' + id);
+});
+
+var publishPost = _asyncToGenerator(function* (post) {
+  var res = yield fetch('/api/posts/new', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
+  });
+  var _post = yield res.json();
+
+  yield _min2['default'].sadd('posts:id', _post._id);
+  yield _min2['default'].hmset('post:' + _post._id, Object.defineProperties({
+    id: _post._id,
+    title: _post.title,
+    content: _post.content,
+    author: _post.author,
+    comments: 0
+  }, {
+    summary: {
+      get: function get() {
+        return _post.title.substr(0, 20) + '...';
+      },
+      configurable: true,
+      enumerable: true
+    }
+  }));
+
+  _post.id = _post._id;
+
+  return _post;
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { var callNext = step.bind(null, 'next'); var callThrow = step.bind(null, 'throw'); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(callNext, callThrow); } } callNext(); }); }; }
 
 require('whatwg-fetch');
 
@@ -18390,16 +18341,11 @@ var _min = require('min');
 
 var _min2 = _interopRequireDefault(_min);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { var callNext = step.bind(null, "next"); var callThrow = step.bind(null, "throw"); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(callNext, callThrow); } } callNext(); }); }; }
-
-exports.default = {
+exports['default'] = {
   listPosts: listPosts,
   getPost: getPost,
   publishPost: publishPost
 };
+module.exports = exports['default'];
 
 },{"min":6,"whatwg-fetch":74}]},{},[83]);

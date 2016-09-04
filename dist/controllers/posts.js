@@ -1,8 +1,10 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _thunkify = require('thunkify');
 
@@ -12,14 +14,12 @@ var _request = require('request');
 
 var _request2 = _interopRequireDefault(_request);
 
-var _posts2 = require('../models/posts');
+var _modelsPosts = require('../models/posts');
 
-var _posts3 = _interopRequireDefault(_posts2);
+var _modelsPosts2 = _interopRequireDefault(_modelsPosts);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var requestAsync = (0, _thunkify2.default)(function (opts, callback) {
-  (0, _request2.default)(opts, function (err, res, body) {
+var requestAsync = (0, _thunkify2['default'])(function (opts, callback) {
+  (0, _request2['default'])(opts, function (err, res, body) {
     return callback(err, body);
   });
 });
@@ -34,7 +34,7 @@ router.get.listPosts = function* () {
   var page = parseInt(this.query.page || 0);
   var count = 10;
 
-  var _posts = yield _posts3.default.find({}, {
+  var _posts = yield _modelsPosts2['default'].find({}, {
     skip: page * count,
     limit: count
   });
@@ -61,7 +61,7 @@ router.get.listPosts = function* () {
 router.get.getPost = function* () {
   var id = this.params.id;
 
-  var post = yield _posts3.default.findById(id);
+  var post = yield _modelsPosts2['default'].findById(id);
 
   var duoshuoReply = JSON.parse((yield requestAsync('http://api.duoshuo.com/threads/listPosts.json?short_name=es2015-in-action&thread_key=' + id + '&page=0&limit=1000')));
 
@@ -79,11 +79,10 @@ router.get.getPost = function* () {
 router.post.newPost = function* () {
   var data = this.request.body;
 
-  var post = yield _posts3.default.insert(data);
+  var reply = yield _modelsPosts2['default'].insert(data);
 
-  this.body = {
-    post: post
-  };
+  this.body = reply;
 };
 
-exports.default = router;
+exports['default'] = router;
+module.exports = exports['default'];

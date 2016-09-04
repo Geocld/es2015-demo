@@ -11,8 +11,7 @@ var babel = require('gulp-babel')
 gulp.task('babel-complie', function() {
   return gulp.src('src/**/*.js')
     .pipe(babel({
-      presets: [ 'es2015-without-regenerator' ],
-      plugins: [ 'transform-async-to-generator' ]
+      optional: [ 'asyncToGenerator' ]
     }))
     .pipe(gulp.dest('dist/'))
 })
@@ -24,8 +23,7 @@ gulp.task('browserify', function() {
     entries: ['./src/public/main.js']
   })
     .transform(babelify.configure({
-      "presets": [ 'es2015-without-regenerator' ],
-      "plugins": [ 'transform-async-to-generator' ]
+      optional: [ 'asyncToGenerator' ]
     }))
     .bundle()
     .pipe(source('bundle.js'))

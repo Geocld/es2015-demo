@@ -1,13 +1,14 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _mongo = require('../lib/mongo');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _mongo2 = _interopRequireDefault(_mongo);
+var _libMongo = require('../lib/mongo');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _libMongo2 = _interopRequireDefault(_libMongo);
 
-exports.default = _mongo2.default.collection('posts');
+exports['default'] = _libMongo2['default'].collection('posts');
+module.exports = exports['default'];

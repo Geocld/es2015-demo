@@ -58,11 +58,9 @@ router.get.getPost = function*() {
 router.post.newPost = function*() {
   let data = this.request.body
 
-  let post = yield posts.insert(data)
+  var reply = yield posts.insert(data)
 
-  this.body = {
-    post: post
-  }
+  this.body = reply
 }
 
 export default router
